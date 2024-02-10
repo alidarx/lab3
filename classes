@@ -1,0 +1,113 @@
+first task classes
+
+class UseString():
+    def getString(self, value):
+        self.string = value
+        
+    def printString(self):
+        print(self.string)
+
+
+first = UseString()
+first.getString('Some String')
+first.printString()
+
+
+----------------------------------------
+
+second task classes
+
+class Shape:
+    area = 0
+    
+    def findArea(self, *args):
+        s = 1
+        for _ in args:
+            s *= _
+        self.area = s
+        
+        return s
+    
+
+class Rectangle(Shape):
+    def __init__(self, Width, Length):
+        self.Width = Width
+        self.Length = Length
+        
+    def findArea(self, *args):
+        return super().findArea(self.Width, self.Length)
+    
+
+rc = Rectangle(2, 4)
+print(rc.findArea())
+
+----------------------------------------------
+
+third task classes
+
+from math import sqrt
+
+class Point:  
+    def __init__(self, x = 0, y = 0, z = 0):
+        self.x = x
+        self.y = y
+        self.z = z
+    
+    def show(self):
+        return self.x, self.y, self.z
+    
+    def move(self, xn = None, yn = None, zn = None):
+        '''
+        def move(x, y, z) if we dont want to change this point we took 'None' type
+        like move(None, 2, None)
+        
+        '''
+        if xn != None: self.x = xn
+        if yn != None: self.y = yn
+        if zn != None: self.z = zn
+        
+    def dist(self, point):
+        if type(point) != Point: return None
+        '''
+        :param: point class
+
+        '''
+        return sqrt((point.x ** 2 - self.x ** 2) + (point.y ** 2 - self.y ** 2) + (point.z ** 2 - self.z ** 2))
+    
+
+first_point = Point(1, 2, 3)
+second_point = Point(2, 3, 4)
+
+print(first_point.show())
+first_point.move(None, 3, 4)
+print(first_point.show())
+print(first_point.dist(second_point))
+
+--------------------------------------
+
+fourth task classes
+
+class Account:
+    def __init__(self, name, balance):
+        self.__name = name
+        self.balance = balance
+        
+    def deposit(self, money):
+        self.balance += money
+    
+    def withdraw(self, money):
+        if money > self.balance:
+            return f'Не хватает денег на счету для снятия такого счета\nНа счету: {self.balance}'
+        self.balance -= money
+    
+    def check_balance(self):
+        return self.balance
+
+---------------------------------------
+
+fifth task classes
+
+x = lambda n: [_ for _ in n if not len([True for i in range(2, _) if _ % i == 0 ]) and _ != 1]
+print(x(list(range(1, 20))))
+
+
