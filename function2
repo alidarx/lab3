@@ -1,0 +1,152 @@
+# movies dictionary
+
+movies = [
+{
+"name": "Usual Suspects", 
+"imdb": 7.0,
+"category": "Thriller"
+},
+{
+"name": "Hitman",
+"imdb": 6.3,
+"category": "Action"
+},
+{
+"name": "Dark Knight",
+"imdb": 9.0,
+"category": "Adventure"
+},
+{
+"name": "The Help",
+"imdb": 8.0,
+"category": "Drama"
+},
+{
+"name": "The Choice",
+"imdb": 6.2,
+"category": "Romance"
+},
+{
+"name": "Colonia",
+"imdb": 7.4,
+"category": "Romance"
+},
+{
+"name": "Love",
+"imdb": 6.0,
+"category": "Romance"
+},
+{
+"name": "Bride Wars",
+"imdb": 5.4,
+"category": "Romance"
+},
+{
+"name": "AlphaJet",
+"imdb": 3.2,
+"category": "War"
+},
+{
+"name": "Ringing Crime",
+"imdb": 4.0,
+"category": "Crime"
+},
+{
+"name": "Joking muck",
+"imdb": 7.2,
+"category": "Comedy"
+},
+{
+"name": "What is the name",
+"imdb": 9.2,
+"category": "Suspense"
+},
+{
+"name": "Detective",
+"imdb": 7.0,
+"category": "Suspense"
+},
+{
+"name": "Exam",
+"imdb": 4.2,
+"category": "Thriller"
+},
+{
+"name": "We Two",
+"imdb": 7.2,
+"category": "Romance"
+}
+]
+
+
+-----------------------------------------------
+
+from db import movies
+
+def is_good_film(name_user: list) -> bool:
+    for Dictionary in movies:
+        if name_user.lower() == Dictionary['name'].lower(): return True if Dictionary['imdb'] > 5.5 else False
+    else:
+        return 'We dont have a this film in db'
+    
+print(is_good_film(input()))
+
+---------------------------------------------------
+from db import movies
+
+def good_film_list(movies = movies) -> None:
+    for movie in movies:
+        if movie['imdb'] > 5.5:
+            print(movie['name'])
+
+good_film_list()
+----------------------------------------
+from db import movies
+
+def category_films(category_from_user: str) -> None:
+    for movie in movies:
+        if category_from_user.lower() == movie['category'].lower(): print(movie['name'])
+    else:
+        return 'we dont have filters for this category'
+
+
+category_films(input())
+-----------------------------------------
+from db import movies
+
+def get_movie_with_avg_imdb(movies_list: list) -> None:
+    count_of_movie = len(movies_list)
+    all_imdb_scores = 0
+    movies_which_havent = '\n'
+
+    for name_of_movie in movies_list:
+        for movie in movies:
+            if name_of_movie.lower() == movie['name'].lower():
+                all_imdb_scores += movie['imdb']
+                break
+        else:
+            movies_which_havent += f'we dont have film with name {name_of_movie} in db'
+            count_of_movie -= 1
+
+    return f'avarage imdb score is: {all_imdb_scores / count_of_movie}' if len(movies_which_havent) == 0 else f'avarage imdb score is: {all_imdb_scores / count_of_movie} {movies_which_havent}'
+
+
+print(get_movie_with_avg_imdb(['dark knight', 'hitman']))
+---------------------------------------------------
+from db import movies
+
+def find_avg_from_category(category: str) -> str:
+    count_of_movies_with_this_category = 0
+    all_imdb_scores_with_this_category = 0
+
+    for movie in movies:
+        if movie['category'].lower() == category.lower():
+            count_of_movies_with_this_category += 1
+            all_imdb_scores_with_this_category += movie['imdb']
+    
+    if count_of_movies_with_this_category == 0: return None
+    return f'avg score for your category: {all_imdb_scores_with_this_category / count_of_movies_with_this_category}'
+
+print(find_avg_from_category("Acion"))
+---------------------------------------------------------
+
